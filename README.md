@@ -134,3 +134,32 @@ db.recipes.deleteOne({ title: "Classic Tomato Soup" })
 ```
 db.recipes.countDocuments({ title: "Classic Tomato Soup" })
 ```
+- ***Bonus 1***: MongoDB Shell command to show all documents included in all collections from current database
+```
+db.getCollectionNames().forEach(c => {
+	db.getCollection(c).find().forEach(doc => {
+		print('\n\x1b[36m' + db.getName() + '\x1b[0m => \x1b[33m' + c + '\x1b[0m');
+		printjson(doc)
+	})
+})
+```
+Or run in **mongosh.exe**
+```
+mongosh.exe mongodb://127.0.0.1:27017/digitalCookbookDB --eval "db.getCollectionNames().forEach(c=>{db.getCollection(c).find().forEach(doc=>{print('\n\x1b[36m'+db.getName()+'\x1b[0m => \x1b[33m'+c+'\x1b[0m');printjson(doc)})})"
+```
+- ***Bonus 2***: MongoDB Shell command to show all documents included in all collections from all database
+```
+db.adminCommand({listDatabases:1}).databases.forEach(d => {
+	const c = db.getMongo().getDB(d.name).getCollectionNames();
+	c.forEach(c => {
+		db.getMongo().getDB(d.name).getCollection(c).find().forEach(doc => {
+			print('\n\x1b[36m' + d.name + '\x1b[0m => \x1b[33m' + c + '\x1b[0m');
+			printjson(doc)
+		})
+	})
+})
+```
+Or run in **mongosh.exe**
+```
+mongosh.exe mongodb://127.0.0.1:27017/digitalCookbookDB --eval "db.adminCommand({listDatabases:1}).databases.forEach(d=>{const c=db.getMongo().getDB(d.name).getCollectionNames();c.forEach(c=>{db.getMongo().getDB(d.name).getCollection(c).find().forEach(doc=>{print('\n\x1b[36m'+d.name+'\x1b[0m => \x1b[33m'+c+'\x1b[0m');printjson(doc)})})})"
+```
