@@ -11,9 +11,9 @@
 ### Set Up Environment Variables:
 - Create a file named **.env** in the root of project.
 - Inside **.env**, add MongoDB connection string.
-- For Local MongoDB: ```MONGO_URI=mongodb://127.0.0.1:27017```
+- For Local MongoDB: ```MONGO_URI=mongodb://127.0.0.1:27017/digitalCookbookDB```
 - For MongoDB Atlas: Get the connection string from Atlas cluster dashboard and replace <password> with database user's password.
-```MONGO_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net```
+```MONGO_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/digitalCookbookDB```
 ### Create the Connection Script (db.js)
 - Create a file named **db.js**.
 - In this file, use Mongoose to connect to database using the URI from **.env** file. Handle both successful connections and connection errors.
@@ -62,12 +62,12 @@ git clone https://github.com/nykenkung/Digital-Cookbook.git
 ```npm install mongoose dotenv```
 3) Run MongoDB server if run locally
 ```
-<MongoDB server installed directory>\bin\mongod.exe --dbpath=<MongoDB data directory>\data\db">
+powershell -Command "<MongoDB server installed directory>\bin\mongod.exe -dbpath=<MongoDB data directory>\data\db | ForEach-Object { try { ($_ | ConvertFrom-Json) | ConvertTo-Json } catch { $_ } }"
 ```
 4) Modify the **.env** and add MongoDB connection string
 ```
-(For Local MongoDB) MONGO_URI=mongodb://127.0.0.1:27017
-(For MongoDB Atlas) MONGO_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net
+(For Local MongoDB) MONGO_URI=mongodb://127.0.0.1:27017/digitalCookbookDB
+(For MongoDB Atlas) MONGO_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/digitalCookbookDB
 ```
 ### 5) Run the backend server, it allows to use commands and parameters after ```node index.js (create, list, find, update, delete, sample)```
 For exmaple:
