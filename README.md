@@ -98,7 +98,7 @@ New Description: "A cozy and comforting tomato soup perfect for chilly days."
 ```
 - To remove the recipe, use command and parameter: ```node index.js delete <title>```
 ```
-Example: node index.js delete "Classic Tomato Soup
+Example: node index.js delete "Classic Tomato Soup"
 ```
 - To create a sample recipe, use command: ```node index.js sample```
 ```
