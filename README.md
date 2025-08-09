@@ -7,7 +7,8 @@
 ### Initialize Project:
 - Navigate into the directory and run ```npm init -y``` to create a ***package.json*** file.
 ### Install Dependencies:
-- Install ***Mongoose*** and ***dotenv*** (for managing environment variables). ```npm install dotenv mongoose nodemon eslint```
+- Install ***Mongoose*** and ***dotenv*** (for managing environment variables).
+```npm install dotenv mongoose nodemon eslint```
 ### Set Up Environment Variables:
 - Create a file named ***.env*** in the root of project.
 - Inside ***.env***, add MongoDB connection string.
@@ -31,10 +32,10 @@
 - ***prepTimeInMinutes***: Number, must be a positive number.
 - ***createdAt***: Date, with a default value of the current date/time.
 ### Create the Model
-- In the same ***recipe.js*** file, create and export a Mongoose Model from schema. Name the model "**Recipe**".
+- In the same ***recipe.js*** file, create and export a Mongoose Model from schema. Name the model "***Recipe***".
 
 ## Part 3: Implementing CRUD Operations
-- Create a main application file ***index.js*** to run database operations. This file will import database connection and Recipe model.
+- Create a main application file ***index.js*** to run database operations. This file will import database connection and ***Recipe*** model.
 ### Add a New Recipe
 - Write a function ***createRecipe()*** that creates a new recipe document and saves it to the database.
 ### Use sample data like the following
@@ -76,12 +77,12 @@ powershell -Command "<MongoDB server installed directory>\bin\mongod.exe -dbpath
 (For MongoDB Atlas) MONGO_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/digitalCookbookDB
 ```
 ### 5) Run the backend server, it allows to use commands and parameters after ```npm start``` or ```node index.js (create, list, find, update, delete, sample)```
-- **(CREATE)** To add the recipe, use command and 5 parameters after ``npm start create``` or ```node index.js create <title> <description> <ingredient1,ingredient2,...> <instructions> <prepTimeInMinutes>```
+- **(CREATE)** To add the recipe, use command and 5 parameters after ```npm start create``` or ```node index.js create <title> <description> <ingredient1,ingredient2,...> <instructions> <prepTimeInMinutes>```
 ```
-For Example
+For Example:
 node index.js create "Classic Tomato Soup" "A simple and delicious homemade tomato soup." "Tomatoes,Onion,Garlic,Vegetable Broth,Olive Oil" "1. Sauté onions and garlic. 2. Add tomatoes and broth. 3. Simmer and blend." 30
 
-Added recipe:
+Added Recipe:
 Title: "Classic Tomato Soup"
 Description: "A simple and delicious homemade tomato soup."
 Ingredients: ["Tomatoes", "Onion", "Garlic", "Vegetable Broth", "Olive Oil"]
@@ -89,31 +90,31 @@ Instructions: "1. Sauté onions and garlic. 2. Add tomatoes and broth. 3. Simmer
 Prep Time: 30 minutes
 ```
 - **(LIST)** To see all recipes, use command ```npm start list``` or ```node index.js list```
-- **(FIND)** To find the recipe, use command and parameter after ``npm start find``` or ```node index.js find <title>```
+- **(FIND)** To find the recipe, use command and parameter after ```npm start find``` or ```node index.js find <title>```
 ```
-For Example
+For Example:
 node index.js find "Classic Tomato Soup"
 ```
 - **(UPDATE)** To update recipe description, use command and 2 parameters after ```npm start update``` or ```node index.js update <title> <newDescription>```
 ```
-For Example
+For Example:
 node index.js update "Classic Tomato Soup" "A cozy and comforting tomato soup perfect for chilly days."
 
-Updated recipe:
+Updated Recipe:
 Title: "Classic Tomato Soup"
 New Description: "A cozy and comforting tomato soup perfect for chilly days."
 ```
 - **(DELETE)** To remove the recipe, use command and parameter after ```npm start delete``` or ```node index.js delete <title>```
 ```
-For Example
+For Example:
 node index.js delete "Classic Tomato Soup"
 ```
 - **(SAMPLE)** To create a sample recipe, use command ```npm start sample``` or ```node index.js sample```
 ```
-For example
+For Example:
 node index.js sample
 
-Added sample recipe:
+Added Sample Recipe:
 Title: "Garlic Bread"
 Description: "Crispy garlic bread perfect with pasta or soup."
 Ingredients: ["Bread", "Garlic", "Butter", "Parsley"]
@@ -123,29 +124,29 @@ Prep Time: 15 minutes
 
 ### Also, it can directly operate database data by MongoDB Shell:
 ```
-mongosh mongodb://localhost:27017/digitalCookbookDB)
+mongosh.exe mongodb://localhost:27017/digitalCookbookDB)
 ```
-- Adding the recipe:
+- **(recipes.insertOne)** Adding the recipe:
 ```
 db.recipes.insertOne({ title: "Classic Tomato Soup", description: "A simple and delicious homemade tomato soup.", ingredients: ["Tomatoes", "Onion", "Garlic", "Vegetable Broth", "Olive Oil"], instructions: "1. Sauté onions and garlic. 2. Add tomatoes and broth. 3. Simmer and blend.", prepTimeInMinutes: 30 })
 ```
-- Listing all recipes in readable format:
+- **(recipes.find)** Listing all recipes in readable format:
 ```
 db.recipes.find().pretty()
 ```
-- Updating the recipe with specific title and new description:
+- **(recipes.updateOne)** Updating the recipe with specific title and new description:
 ```
 db.recipes.updateOne({ title: "Classic Tomato Soup" }, { $set: { description: "A cozy and comforting tomato soup perfect for chilly days." }})
 ```
-- Deleting the recipe with specific title:
+- **(recipes.deleteOne)** Deleting the recipe with specific title:
 ```
 db.recipes.deleteOne({ title: "Classic Tomato Soup" })
 ```
-- Finally, to count the recipe with specific title
+- **(recipes.countDocuments)** Finally, to count the recipe with specific title
 ```
 db.recipes.countDocuments({ title: "Classic Tomato Soup" })
 ```
-- **Bonus 1**: MongoDB Shell executable command to display all documents included in all collections from current database in formatting JSON (empty output if no record)
+- **Bonus 1**: MongoDB Shell executable command to display all documents included in all collections from **current database** in colored formatting JSON (empty output if no record)
 ```
 db.getCollectionNames().forEach(c => {
 	db.getCollection(c).find().forEach(doc => {
@@ -153,16 +154,15 @@ db.getCollectionNames().forEach(c => {
 		printjson(doc)
 	})
 })
-```
-Trimmed into one line
-```
+
+// Trimmed To One Line:
 db.getCollectionNames().forEach(c=>{db.getCollection(c).find().forEach(doc=>{print("\n\x1b[36m"+db.getName()+"\x1b[0m=>\x1b[33m"+c+"\x1b[0m");printjson(doc)})})
 ```
-Or it can be also ran in **mongosh.exe** by ***--eval*** command
+Or it can be also ran in **mongosh.exe** by "***--eval***" command
 ```
 mongosh.exe mongodb://127.0.0.1:27017/digitalCookbookDB --eval "db.getCollectionNames().forEach(c=>{db.getCollection(c).find().forEach(doc=>{print('\n\x1b[36m'+db.getName()+'\x1b[0m => \x1b[33m'+c+'\x1b[0m');printjson(doc)})})"
 ```
-- **Bonus 2**: MongoDB Shell command to show all documents included in all collections from all database
+- **Bonus 2**: MongoDB Shell executable command to display all documents included in all collections from **all database** in colored formatting JSON
 ```
 db.adminCommand({listDatabases:1}).databases.forEach(d => {
 	const c = db.getMongo().getDB(d.name).getCollectionNames();
@@ -173,12 +173,11 @@ db.adminCommand({listDatabases:1}).databases.forEach(d => {
 		})
 	})
 })
-```
-Trimmed into one line
-```
+
+// Trimmed To One Line:
 db.adminCommand({listDatabases:1}).databases.forEach(d=>{const c=db.getMongo().getDB(d.name).getCollectionNames();c.forEach(c=>{db.getMongo().getDB(d.name).getCollection(c).find().forEach(doc=>{print("\n\x1b[36m"+d.name+"\x1b[0m => \x1b[33m"+c+"\x1b[0m");printjson(doc)})})})
 ```
-Or it can be also ran in **mongosh.exe** by ***--eval*** command
+Or it can be also ran in **mongosh.exe** by "***--eval***" command
 ```
 mongosh.exe mongodb://127.0.0.1:27017/digitalCookbookDB --eval "db.adminCommand({listDatabases:1}).databases.forEach(d=>{const c=db.getMongo().getDB(d.name).getCollectionNames();c.forEach(c=>{db.getMongo().getDB(d.name).getCollection(c).find().forEach(doc=>{print('\n\x1b[36m'+d.name+'\x1b[0m => \x1b[33m'+c+'\x1b[0m');printjson(doc)})})})"
 ```
