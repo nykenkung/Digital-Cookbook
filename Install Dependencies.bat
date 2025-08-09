@@ -1,1 +1,1 @@
-npm install mongoose dotenv
+npm install dotenv mongoose nodemon eslint
