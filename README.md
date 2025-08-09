@@ -8,7 +8,7 @@
 - Navigate into the directory and run ```npm init -y``` to create a ***package.json*** file.
 ### Install Dependencies:
 - Install ***Mongoose*** and ***dotenv*** (for managing environment variables).
-```npm install dotenv mongoose nodemon eslint```
+```npm install mongoose dotenv```
 ### Set Up Environment Variables:
 - Create a file named ***.env*** in the root of project.
 - Inside ***.env***, add MongoDB connection string.
@@ -59,13 +59,14 @@
 git clone https://github.com/nykenkung/Digital-Cookbook.git
 (Windows CMD) cd /d Digital-Cookbook
 ```
-2) Install Dependencies (***Dotenv, Mongoose, Nodemon, ESLint***)
-- ***Dotenv*** (Manage environment variables)
+2) Install Dependencies (***Dotenv, Mongoose***) and Development Dependencies (***Concurrently, Nodemon, ESLint***)
 - ***Mongoose*** (Interact with MongoDB database)
+- ***Dotenv*** (Manage environment variables)
+- ***Concurrently*** (Manage multiple processes)
 - ***Nodemon*** (Monitor and automatic restart, usage: ```npm run dev``` or ```nodemon index.js```)
 - ***ESLint*** (Analyze static code, usage: ```npm run lint``` or ```npx eslint .```)
 ```
-npm install dotenv mongoose nodemon eslint
+npm install mongoose dotenv & npm install --save-dev concurrently eslint nodemon
 ```
 3) Run MongoDB server if run locally (using Windows Powershell to display in formatting JSON)
 ```
