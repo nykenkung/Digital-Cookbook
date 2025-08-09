@@ -62,7 +62,14 @@ git clone https://github.com/nykenkung/Digital-Cookbook.git
 2) Install Dependencies (***Dotenv, Mongoose***) and Development Dependencies (***Concurrently, Nodemon, ESLint***)
 - ***Mongoose*** (Interact with MongoDB database)
 - ***Dotenv*** (Manage environment variables)
-- ***Concurrently*** (Manage multiple processes)
+- ***Concurrently*** (Manage multiple processes simultaneously like ***node index.js*** and ***mongod.exe***, but could not use command parameter features like ```npm start list``` with this dependency, modify ***package.json*** ```"scripts"``` section to able ***Concurrently***:
+```
+"scripts": {
+	"start": "concurrently \"start cmd /k node index.js\" \"start cmd /k <MongoDB server installed directory>\\bin\\mongod.exe --dbpath=<MongoDB data directory>\\db\"",
+	"dev": "concurrently \"nodemon index.js\" \"start cmd /k <MongoDB server installed directory>\\bin\\mongod.exe --dbpath=<MongoDB data directory>\\db\"",
+	"lint": "npx eslint ."
+},
+```
 - ***Nodemon*** (Monitor and automatic restart, usage: ```npm run dev``` or ```nodemon index.js```)
 - ***ESLint*** (Analyze static code, usage: ```npm run lint``` or ```npx eslint .```)
 ```
@@ -70,7 +77,7 @@ npm install mongoose dotenv & npm install --save-dev concurrently eslint nodemon
 ```
 3) Run MongoDB server if run locally (using Windows Powershell to display in formatting JSON)
 ```
-powershell -Command "<MongoDB server installed directory>\bin\mongod.exe -dbpath=<MongoDB data directory>\data\db | ForEach-Object { try { ($_ | ConvertFrom-Json) | ConvertTo-Json } catch { $_ } }"
+powershell -Command "<MongoDB server installed directory>\bin\mongod.exe --dbpath=<MongoDB data directory>\db | ForEach-Object { try { ($_ | ConvertFrom-Json) | ConvertTo-Json } catch { $_ } }"
 ```
 4) Modify the ***.env*** and add MongoDB connection string
 ```
