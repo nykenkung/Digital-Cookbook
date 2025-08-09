@@ -1,18 +1,15 @@
 {
-	"name": "digital-cookbook",
-	"version": "1.0.0",
-	"description": "",
+	"name": "Digital Cookbook",
 	"main": "index.js",
 	"scripts": {
 		"start": "node index.js",
-		"dev": "nodemon index.js"
+		"dev": "nodemon index.js",
+		"lint": "eslint ."
 	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"type": "commonjs",
 	"dependencies": {
 		"dotenv": "^17.2.1",
-		"mongoose": "^8.17.0"
+		"eslint": "^9.33.0",
+		"mongoose": "^8.17.1",
+		"nodemon": "^3.1.10"
 	}
 }
