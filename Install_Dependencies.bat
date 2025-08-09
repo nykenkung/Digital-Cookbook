@@ -1,1 +1,1 @@
-npm install --save-dev concurrently eslint nodemon & npm install dotenv mongoose
+npm install mongoose dotenv & npm install --save-dev concurrently eslint nodemon
